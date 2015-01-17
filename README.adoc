@@ -1,6 +1,6 @@
 = asciidoctorj-wildfly
 
-Tests to verify that AsciidoctorJ works as a module in WildFly.
+Arquillian Tests to verify that AsciidoctorJ works as a module in WildFly.+
 
 AsciidoctorJ is the Java library Wrapper for Asciidoctor.
 
@@ -9,8 +9,37 @@ It works on standalone mode but it can also be included into a Java app server s
 This project ensure that a AsciidoctorJ version and its dependencies work into severals WildFly version.+
 For now, tests are :
 
-* AsciidoctorJ 1.5.2 and WildFly 8.1.0
 * AsciidoctorJ 1.5.2 and WildFly 8.2.0
 
+[IMPORTANT]
+.Prerequisites
+====
+* JDK 7
+* Apache Maven 3.1
+* Docker configuration OK
+====
+
+== Let arquillian build the docker image and then execute tests :
+
+* Build the asciidoctorj/wildfly docker image, run a container and execute arquillian test
+
+  mvn clean test -Pwildfly82_dockerfile 
+  
+== Execute arquillian test in a "asciidoctorj/wildfly" running container :
+
+* Build the docker image
+
+  cd src/main/resources/wildfly82
+  docker build
+  
+* Execute tests
+  mvn clean test -Pwildfly82
+  
+[NOTE]
+====
+You can pass your ip/port configuration with a Maven property :
+
+  mvn clean test -Pwildfly82 -Darquillian.cube.serverUri=https://192.168.59.103:2376
+====
 
 
