@@ -8,10 +8,11 @@ RUN mkdir -p ${JBOSS_HOME}/modules/org/asciidoctor/main
 ENV ASCIIDOCTORJ_MODULE /opt/jboss/wildfly/modules/org/asciidoctor/main
 
 #Set the ULR_BASE en variable
-ENV URL_BASE https://search.maven.org/remotecontent?filepath=
+ENV URL_BASE https://repo1.maven.org/maven2/
 
 ADD module.xml ${ASCIIDOCTORJ_MODULE}/module.xml
-RUN cd ${ASCIIDOCTORJ_MODULE} && curl -O ${URL_BASE}org/asciidoctor/asciidoctorj/1.5.2/asciidoctorj-1.5.2.jar \
-&& curl -O ${URL_BASE}org/jruby/jruby/1.7.16.1/jruby-1.7.16.1.jar
+RUN cd ${ASCIIDOCTORJ_MODULE} \
+&& curl -O ${URL_BASE}org/asciidoctor/asciidoctorj/1.5.2/asciidoctorj-1.5.2.jar \
+&& curl -O -m 900 ${URL_BASE}org/jruby/jruby-complete/1.7.16.1/jruby-complete-1.7.16.1.jar
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]

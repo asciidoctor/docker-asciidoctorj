@@ -4,7 +4,9 @@
     <groupId>org.asciidoctor</groupId>
     <artifactId>asciidoctorj-wildfly</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    
     <name>AsciidoctorJ WildFly Integration Tests</name>
+    <packaging>war</packaging>
 
     <properties>
         <arquillian.cube.autostart />
@@ -19,6 +21,8 @@
         <version.wildfly82>8.2.0.Final</version.wildfly82>
         <version.asciidoctorj>1.5.2</version.asciidoctorj>
         <version.jruby>1.7.16.1</version.jruby>
+        <version.war.plugin>2.6</version.war.plugin>
+        <version.surefire.plugin>2.18.1</version.surefire.plugin>
     </properties>
 
     <dependencyManagement>
@@ -135,6 +139,18 @@
 
     <build>
         <plugins>
+        	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<Dependencies>org.asciidoctor</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
