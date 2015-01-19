@@ -10,7 +10,8 @@
 
     <properties>
         <arquillian.cube.autostart />
-        <arquillian.cube.serverUri>https://127.0.0.1:2375</arquillian.cube.serverUri>
+        <docker.serverUri>https://127.0.0.1:2376</docker.serverUri>
+        <docker.serverVersion>1.16</docker.serverVersion>
         <version.arquillian_core>1.1.5.Final</version.arquillian_core>
         <version.arquillian_cube>1.0.0.Alpha3</version.arquillian_cube>
         <version.junit>4.11</version.junit>

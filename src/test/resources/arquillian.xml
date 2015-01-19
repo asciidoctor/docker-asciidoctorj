@@ -5,8 +5,8 @@
     http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
 
     <extension qualifier="docker">
-        <property name="serverVersion">1.15</property>
-        <property name="serverUri">${arquillian.cube.serverUri}</property>
+        <property name="serverVersion">${docker.serverVersion}</property>
+        <property name="serverUri">${docker.serverUri}</property>
         <property name="autoStartContainers">${arquillian.cube.autostart}</property>
         <property name="shouldAllowToConnectToRunningContainers">true</property>
         <property name="dockerContainers">
