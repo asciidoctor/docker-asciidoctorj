@@ -26,13 +26,15 @@ For now, tests are :
 
   mvn clean test -Pwildfly82_dockerfile 
   
-== Execute arquillian test in a "asciidoctorj/wildfly" running container :
+== Execute arquillian test in a "asciidoctorj/wildfly82" running container :
 
 * Build the docker image
 
   cd src/main/resources/wildfly82
   docker build -t asciidoctorj/wildfly82 .
-  
+
+* Run a docker container with this image
+
 * Execute tests
 
   mvn clean test -Pwildfly82
