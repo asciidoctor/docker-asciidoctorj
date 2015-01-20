@@ -6,7 +6,7 @@
 
     <extension qualifier="docker">
         <property name="serverVersion">${docker.serverVersion}</property>
-        <property name="serverUri">${docker.serverUri}</property>
+        <property name="serverUri">https://${docker.serverIp}:${docker.serverPort}</property>
         <property name="autoStartContainers">${arquillian.cube.autostart}</property>
         <property name="shouldAllowToConnectToRunningContainers">true</property>
         <property name="dockerContainers">
@@ -22,7 +22,7 @@
             wildfly82:
               image: asciidoctorj/wildfly82:latest
               await:
-                strategy: native
+                strategy: polling
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
         </property>
     </extension>
@@ -30,6 +30,7 @@
     <container qualifier="wildfly82" default="true">
         <configuration>
             <property name="target">wildfly:8.2.0.Final:remote</property>
+            <property name="managementServer">${docker.serverIp}</property>
             <property name="managementPort">9991</property>
             <property name="username">admin</property>
             <property name="password">Admin#70365</property>
