@@ -46,4 +46,17 @@ You can pass your ip/port configuration with a Maven property :
   mvn clean test -Pwildfly82 -Darquillian.cube.serverUri=https://192.168.59.103:2376
 ====
 
+== SSL Error
 
+From : https://github.com/boot2docker/boot2docker/issues/573
+
+cert.pem and key.pem files are used by the client side. With the docker command you specify the --cert and --key options. But browsers and some other application needs them in a combined form. That format called PKCS #12
+
+  openssl pkcs12 -export \
+  -inkey  key.pem \
+  -in cert.pem \
+  -name b2d-client-side \
+  -out b2d-client-side.p12 \
+  -password pass:tcuser
+  
+Now you need to import this p12 certificate. The import password is tcuser.
