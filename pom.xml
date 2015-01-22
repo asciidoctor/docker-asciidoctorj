@@ -11,7 +11,7 @@
     <properties>
         <arquillian.cube.autostart />
         <docker.serverIp>127.0.0.1</docker.serverIp>
-        <docker.serverPort>2376</docker.serverPort>
+        <docker.serverPort>2375</docker.serverPort>
         <docker.serverVersion>1.16</docker.serverVersion>
         <version.arquillian_core>1.1.5.Final</version.arquillian_core>
         <version.arquillian_cube>1.0.0.Alpha3</version.arquillian_cube>

@@ -6,7 +6,7 @@
 
     <extension qualifier="docker">
         <property name="serverVersion">${docker.serverVersion}</property>
-        <property name="serverUri">https://${docker.serverIp}:${docker.serverPort}</property>
+        <property name="serverUri">http://${docker.serverIp}:${docker.serverPort}</property>
         <property name="autoStartContainers">${arquillian.cube.autostart}</property>
         <property name="shouldAllowToConnectToRunningContainers">true</property>
         <property name="dockerContainers">

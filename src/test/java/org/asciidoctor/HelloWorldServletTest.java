@@ -27,7 +27,7 @@ public class HelloWorldServletTest {
 
     @Deployment(testable=false)
     public static WebArchive create() {
-        return ShrinkWrap.create(WebArchive.class, "hello.war").addClass(HelloWorldServlet.class);
+        return ShrinkWrap.create(WebArchive.class, "hello.war").addAsManifestResource("wildfly/MANIFEST.MF", "MANIFEST.MF").addClass(HelloWorldServlet.class);
     }
 
     @Test
