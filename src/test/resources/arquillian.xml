@@ -20,7 +20,7 @@
                 strategy: static
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
             wildfly82:
-              image: asciidoctorj/wildfly82:latest
+              image: asciidoctor/wildfly82:latest
               await:
                 strategy: polling
               portBindings: [8081->8080/tcp, 9991->9990/tcp]

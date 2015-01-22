@@ -22,16 +22,15 @@ For now, tests are :
 
 == Let arquillian build the docker image and then execute tests :
 
-* Build the asciidoctorj/wildfly docker image, run a container and execute arquillian test
+* Build the asciidoctor/wildfly docker image, run a container and execute arquillian test
 
   mvn clean test -Pwildfly82_dockerfile 
   
-== Execute arquillian test in a "asciidoctorj/wildfly82" running container :
+== Execute arquillian test in a "asciidoctor/wildfly82" running container :
 
 * Build the docker image
 
-  cd src/main/resources/wildfly82
-  docker build -t asciidoctorj/wildfly82 .
+  docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v82
 
 * Run a docker container with this image
 
@@ -43,7 +42,7 @@ For now, tests are :
 ====
 You can pass your ip/port configuration with a Maven property :
 
-  mvn clean test -Pwildfly82 -Darquillian.cube.serverUri=https://192.168.59.103:2376
+  mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103
 ====
 
 == SSL Error
