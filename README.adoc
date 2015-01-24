@@ -1,73 +1,56 @@
-= asciidoctorj-wildfly
+= Asciidoctor::WildFly Docker
+Maxime Gréau <https://github.com/mgreau[@mgreau]>
+:page-layout: base
+:idprefix:
+ifdef::env-github[:idprefix: user-content-]
+:idseparator: -
+:source-language: java
+:language: {source-language}
+:uri-asciidoctor: {uri-docs}/what-is-asciidoctor
+:uri-repo: https://github.com/mgreau/asciidoctor-wildlfy-docker
+:uri-issues: {uri-repo}/issues
+:uri-discuss: http://discuss.asciidoctor.org
+:uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
 
-Arquillian Tests to verify that AsciidoctorJ works as a module in WildFly.
+Asciidoctor WildFly Docker ensure that Asciidoctor projects work into a Java EE Application Server.
+This repository provides :
 
-AsciidoctorJ is the Java library Wrapper for Asciidoctor.
+* a Dockerfile image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
+* Arquillian tests that used this docker image to convert AsciiDoc files to HTML and PDF files 
 
-It works on standalone mode but it can also be included into a Java app server so that Web applications can use it.
++
+WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
-This project ensure that a AsciidoctorJ version and its dependencies work into severals WildFly version.+
+== How to execute the Arquillian Tests
 
-For now, tests are :
+. Ensure Java, Maven and Docker are installed:
 
-* AsciidoctorJ 1.5.2 and WildFly 8.2.0
+. Clone this project :
 
-[IMPORTANT]
-.Prerequisites
-====
-* JDK 7
-* Apache Maven 3.1
-* Docker configuration OK
-====
+ $ git clone git://github.com/mgreau/asciidoctor-wildfly-docker.git
 
-== Let arquillian build the docker image and then execute tests :
+. Build the Docker image
 
-* Build the asciidoctor/wildfly docker image, run a container and execute arquillian test
+  docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
 
-  mvn clean test -Pwildfly82_dockerfile 
-  
-== Execute arquillian test in a "asciidoctor/wildfly82" running container :
-
-* Build the docker image
-
- docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
-
-* Run a docker container with this image
-
-* Execute tests
+. Execute tests (Start a container / Execute tests / Stop and destroy the container)
 
   mvn clean test -Pwildfly82
+
   
 [NOTE]
 ====
-You can pass your ip/port configuration with a Maven property :
+You can pass the docker server ip/port configuration with Maven properties :
 
-  mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103
+  mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103 -Ddocker.serverPort=27
 ====
-
 
 == Errors
 
-=== AsciidoctorJ EPUB3
+=== Error with asciidoctorj-epub3
 
-The asciidoctorj-epub3 doesn't work, there is an error :
-
+The asciidoctorj-epub3 doesn't work for now, there is an error :
 
 ----
 "(LoadError) load error: nokogiri/nokogiri -- java.lang.NoClassDefFoundError: com/sun/org/apache/xpath/internal/VariableStackHTML
 ----
-
-=== Docker SSL Error
-
-From : https://github.com/boot2docker/boot2docker/issues/573
-
-cert.pem and key.pem files are used by the client side. With the docker command you specify the --cert and --key options. But browsers and some other application needs them in a combined form. That format called PKCS #12
-
-  openssl pkcs12 -export \
-  -inkey  key.pem \
-  -in cert.pem \
-  -name b2d-client-side \
-  -out b2d-client-side.p12 \
-  -password pass:tcuser
-  
-Now you need to import this p12 certificate. The import password is tcuser.
