@@ -31,6 +31,7 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
 . Build the Docker image
 
+  cd asciidoctor-wildfly-docker
   docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
 
 . Execute tests (Start a container / Execute tests / Stop and destroy the container)
