@@ -3,13 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.asciidoctor</groupId>
-	<artifactId>asciidoctorj-wildfly</artifactId>
+	<artifactId>asciidoctor-wildfly-docker</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>AsciidoctorJ WildFly Integration Tests</name>
+	<name>Asciidoctor WildFly Docker</name>
 	<packaging>war</packaging>
 
 	<properties>
+	        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<arquillian.cube.autostart />
 		<docker.serverIp>127.0.0.1</docker.serverIp>
 		<docker.serverPort>2375</docker.serverPort>
