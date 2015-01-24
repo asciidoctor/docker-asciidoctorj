@@ -27,7 +27,7 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
 . Clone this project :
 
- $ git clone git://github.com/mgreau/asciidoctor-wildfly-docker.git
+ $ git clone https://github.com/mgreau/asciidoctor-wildfly-docker.git
 
 . Build the Docker image
 
