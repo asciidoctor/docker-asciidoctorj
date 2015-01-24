@@ -1,0 +1,10 @@
+= Book Title
+Author Name
+:imagesdir: images
+
+[abstract]
+This is the actual content.
+
+== First Section
+
+And off we go.

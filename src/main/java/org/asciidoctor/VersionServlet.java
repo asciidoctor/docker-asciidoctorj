@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/HelloWorld")
-public class HelloWorldServlet extends HttpServlet {
+@WebServlet("/version")
+public class VersionServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
@@ -20,7 +20,7 @@ public class HelloWorldServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         PrintWriter writer = resp.getWriter();
-        writer.println("Hello World : " + asciidoctor.asciidoctorVersion());
+        writer.println("Asciidoctor version : " + asciidoctor.asciidoctorVersion());
         
     }
 }

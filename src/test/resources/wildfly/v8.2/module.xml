@@ -2,9 +2,11 @@
 <module xmlns="urn:jboss:module:1.0" name="org.asciidoctor">
   <resources>
     <resource-root path="asciidoctorj-1.5.2.jar"/>
-    <resource-root path="asciidoctorj-epub3-1.5.0-alpha.4.jar"/>
     <resource-root path="asciidoctorj-pdf-1.5.0-alpha.6.jar"/>
     <resource-root path="jruby-complete-1.7.16.1.jar"/>
+    
+    <!-- EPUB3 doesn't work with this configuration for now -->
+    <resource-root path="asciidoctorj-epub3-1.5.0-alpha.4.jar"/>
   </resources>
 
   <dependencies>

@@ -1,102 +1,122 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-        
-    <groupId>org.asciidoctor</groupId>
-    <artifactId>asciidoctorj-wildfly</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    
-    <name>AsciidoctorJ WildFly Integration Tests</name>
-    <packaging>war</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <properties>
-        <arquillian.cube.autostart />
-        <docker.serverIp>127.0.0.1</docker.serverIp>
-        <docker.serverPort>2375</docker.serverPort>
-        <docker.serverVersion>1.16</docker.serverVersion>
-        <version.arquillian_core>1.1.5.Final</version.arquillian_core>
-        <version.arquillian_cube>1.0.0.Alpha3</version.arquillian_cube>
-        <version.junit>4.11</version.junit>
-        <version.docker-java>0.10.4</version.docker-java>
-        <version.snakeyaml>1.14</version.snakeyaml>
-        <version.mockito>1.10.8</version.mockito>
-        <version.javaee_7>1.0.1.Final</version.javaee_7>
-        <version.wildfly82>8.2.0.Final</version.wildfly82>
-        <version.asciidoctorj>1.5.2</version.asciidoctorj>
-        <version.jruby>1.7.16.1</version.jruby>
-        <version.war.plugin>2.6</version.war.plugin>
-        <version.surefire.plugin>2.18.1</version.surefire.plugin>
-    </properties>
+	<groupId>org.asciidoctor</groupId>
+	<artifactId>asciidoctorj-wildfly</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.arquillian.cube</groupId>
-                <artifactId>arquillian-cube-api</artifactId>
-                <version>${version.arquillian_cube}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.arquillian.cube</groupId>
-                <artifactId>arquillian-cube-spi</artifactId>
-                <version>${version.arquillian_cube}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.arquillian.cube</groupId>
-                <artifactId>arquillian-cube-docker</artifactId>
-                <version>${version.arquillian_cube}</version>
-            </dependency>
+	<name>AsciidoctorJ WildFly Integration Tests</name>
+	<packaging>war</packaging>
 
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.arquillian_core}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.container</groupId>
-                <artifactId>arquillian-container-impl-base</artifactId>
-                <version>${version.arquillian_core}</version>
-                <classifier>tests</classifier>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.core</groupId>
-                <artifactId>arquillian-core-impl-base</artifactId>
-                <version>${version.arquillian_core}</version>
-                <classifier>tests</classifier>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.github.docker-java</groupId>
-                <artifactId>docker-java</artifactId>
-                <version>${version.docker-java}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${version.mockito}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>${version.snakeyaml}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-7.0</artifactId>
-                <version>${version.javaee_7}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<properties>
+		<arquillian.cube.autostart />
+		<docker.serverIp>127.0.0.1</docker.serverIp>
+		<docker.serverPort>2375</docker.serverPort>
+		<docker.serverVersion>1.16</docker.serverVersion>
+		<version.arquillian_core>1.1.5.Final</version.arquillian_core>
+		<version.arquillian_cube>1.0.0.Alpha3</version.arquillian_cube>
+		<version.junit>4.11</version.junit>
+		<version.docker-java>0.10.4</version.docker-java>
+		<version.snakeyaml>1.14</version.snakeyaml>
+		<version.mockito>1.10.8</version.mockito>
+		<version.javaee_7>1.0.1.Final</version.javaee_7>
+		<version.wildfly82>8.2.0.Final</version.wildfly82>
+		<version.asciidoctorj>1.5.2</version.asciidoctorj>
+		<version.asciidoctorj_pdf>1.5.0-alpha.6</version.asciidoctorj_pdf>
+		<version.asciidoctorj_epub3>1.5.0-alpha.4</version.asciidoctorj_epub3>
+		<version.jruby>1.7.16.1</version.jruby>
+		<version.war.plugin>2.6</version.war.plugin>
+		<version.surefire.plugin>2.18.1</version.surefire.plugin>
+	</properties>
 
-    <dependencies>
-	    <dependency>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.arquillian.cube</groupId>
+				<artifactId>arquillian-cube-api</artifactId>
+				<version>${version.arquillian_cube}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.arquillian.cube</groupId>
+				<artifactId>arquillian-cube-spi</artifactId>
+				<version>${version.arquillian_cube}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.arquillian.cube</groupId>
+				<artifactId>arquillian-cube-docker</artifactId>
+				<version>${version.arquillian_cube}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>${version.arquillian_core}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.container</groupId>
+				<artifactId>arquillian-container-impl-base</artifactId>
+				<version>${version.arquillian_core}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian.core</groupId>
+				<artifactId>arquillian-core-impl-base</artifactId>
+				<version>${version.arquillian_core}</version>
+				<classifier>tests</classifier>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.github.docker-java</groupId>
+				<artifactId>docker-java</artifactId>
+				<version>${version.docker-java}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${version.mockito}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.yaml</groupId>
+				<artifactId>snakeyaml</artifactId>
+				<version>${version.snakeyaml}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-7.0</artifactId>
+				<version>${version.javaee_7}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
 			<groupId>org.asciidoctor</groupId>
 			<artifactId>asciidoctorj</artifactId>
 			<version>${version.asciidoctorj}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctorj-pdf</artifactId>
+			<version>${version.asciidoctorj_pdf}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.asciidoctor</groupId>
+			<artifactId>asciidoctorj-epub3</artifactId>
+			<version>${version.asciidoctorj_epub3}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -105,45 +125,46 @@
 			<version>${version.jruby}</version>
 			<scope>provided</scope>
 		</dependency>
-       <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
-            <scope>test</scope>
-       </dependency> 
-       <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.arquillian.cube</groupId>
-            <artifactId>arquillian-cube-docker</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.arquillian.cube</groupId>
+			<artifactId>arquillian-cube-docker</artifactId>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.jboss.spec.javax.servlet</groupId>
-            <artifactId>jboss-servlet-api_3.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.2_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.ejb</groupId>
+			<artifactId>jboss-ejb-api_3.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.annotation</groupId>
+			<artifactId>jboss-annotations-api_1.2_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 
-    <build>
-        <plugins>
-        	<plugin>
+	<build>
+		<plugins>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>${version.war.plugin}</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<archive>
@@ -153,55 +174,55 @@
 					</archive>
 				</configuration>
 			</plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-                <configuration>
-                    <systemPropertyVariables>
-                        <arquillian.launch>${arquillian.launch}</arquillian.launch>
-                        <arquillian.cube.autostart>${arquillian.cube.autostart}</arquillian.cube.autostart>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
-        </plugins>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-        </testResources>
-    </build>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${version.surefire.plugin}</version>
+				<configuration>
+					<systemPropertyVariables>
+						<arquillian.launch>${arquillian.launch}</arquillian.launch>
+						<arquillian.cube.autostart>${arquillian.cube.autostart}</arquillian.cube.autostart>
+					</systemPropertyVariables>
+				</configuration>
+			</plugin>
+		</plugins>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+	</build>
 
-    <profiles>
-        
-        <profile>
-            <id>wildfly82</id>
-            <properties>
-                <arquillian.launch>wildfly82</arquillian.launch>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly</groupId>
-                    <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <version>${version.wildfly82}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <id>wildfly82_dockerfile</id>
-            <properties>
-                <arquillian.launch>wildfly82_dockerfile</arquillian.launch>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly</groupId>
-                    <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <version>${version.wildfly82}</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+	<profiles>
+
+		<profile>
+			<id>wildfly82</id>
+			<properties>
+				<arquillian.launch>wildfly82</arquillian.launch>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<version>${version.wildfly82}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>wildfly82_dockerfile</id>
+			<properties>
+				<arquillian.launch>wildfly82_dockerfile</arquillian.launch>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<version>${version.wildfly82}</version>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 </project>

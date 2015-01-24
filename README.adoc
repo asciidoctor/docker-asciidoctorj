@@ -30,7 +30,7 @@ For now, tests are :
 
 * Build the docker image
 
-  docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v82
+ docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
 
 * Run a docker container with this image
 
@@ -45,7 +45,19 @@ You can pass your ip/port configuration with a Maven property :
   mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103
 ====
 
-== SSL Error
+
+== Errors
+
+=== AsciidoctorJ EPUB3
+
+The asciidoctorj-epub3 doesn't work, there is an error :
+
+
+----
+"(LoadError) load error: nokogiri/nokogiri -- java.lang.NoClassDefFoundError: com/sun/org/apache/xpath/internal/VariableStackHTML
+----
+
+=== Docker SSL Error
 
 From : https://github.com/boot2docker/boot2docker/issues/573
 
