@@ -12,38 +12,60 @@ ifdef::env-github[:idprefix: user-content-]
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
 
-Asciidoctor WildFly Docker ensure that Asciidoctor projects work into a Java EE Application Server.
+*Asciidoctor WildFly Docker* ensure that Asciidoctor projects work into a Java EE Application Server.
 This repository provides :
 
 * a Dockerfile image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
-* Arquillian tests that used this docker image to convert AsciiDoc files to HTML and PDF files 
+* Arquillian tests that used a docker container to convert AsciiDoc files to HTML and PDF files 
 
 +
 WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
-== How to execute the Arquillian Tests
 
-. Ensure Java, Maven and Docker are installed:
+
+== All in one with Arquillian : Build the Docker image and execute tests in a container
 
 . Clone this project :
 
  $ git clone https://github.com/mgreau/asciidoctor-wildfly-docker.git
+ 
+. Ensure Java, Maven and Docker are installed
+. Execute tests (Build a docker image / Start a container / Execute tests / Stop and destroy the container)
 
-. Build the Docker image
+  mvn clean test -Pwildfly82_dockerfile
+
+
+== Build the docker image with Docker and THEN execute tests with Arquillian
+
+. How to build the Docker image with docker command :
+.. Clone this project :
+
+ $ git clone https://github.com/mgreau/asciidoctor-wildfly-docker.git
+
+.. Build the Docker image
 
   cd asciidoctor-wildfly-docker
   docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
 
-. Execute tests (Start a container / Execute tests / Stop and destroy the container)
+. How to execute the Arquillian Tests using an existing Docker image
+.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/wildfly82* is present in your registry.
+
+  docker images
+  
+.. Execute tests (Start a container / Execute tests / Stop and destroy the container)
 
   mvn clean test -Pwildfly82
-
+  
+[IMPORTANT]
+====
+ Until the Docker image is present in your registry, you can just execute the Maven command (2b) !
+====
   
 [NOTE]
 ====
 You can pass the docker server ip/port configuration with Maven properties :
 
-  mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103 -Ddocker.serverPort=27
+  mvn clean test -Pwildfly82 -Ddocker.serverIp=192.168.59.103 -Ddocker.serverPort=2376
 ====
 
 == Errors
