@@ -17,7 +17,9 @@
                 remove: true
               exposedPorts: [8080/tcp, 9990/tcp]
               await:
-                strategy: static
+                strategy: polling
+                sleepPollingTime: 50000
+                iterations: 5
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
             wildfly82:
               image: asciidoctor/wildfly82:latest
