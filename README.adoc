@@ -15,7 +15,7 @@ ifdef::env-github[:idprefix: user-content-]
 *Asciidoctor WildFly Docker* ensure that Asciidoctor projects work into a Java EE Application Server.
 This repository provides :
 
-* a Dockerfile image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
+* a Dockerfile to build an image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
 * Arquillian tests that used a docker container to convert AsciiDoc files to HTML and PDF files 
 
 +
