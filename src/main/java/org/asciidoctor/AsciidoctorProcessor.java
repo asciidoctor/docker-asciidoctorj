@@ -1,5 +1,6 @@
 package org.asciidoctor;
 
+
 import static org.asciidoctor.OptionsBuilder.options;
 
 import java.io.File;
@@ -12,11 +13,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.FileSystems;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.logging.Logger;
+
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
@@ -24,15 +27,18 @@ public class AsciidoctorProcessor {
 
 	private Asciidoctor asciidoctor;
 
+	@Inject
+	private Logger logger;
+
 	@PostConstruct
 	public void init() {
 		asciidoctor = Asciidoctor.Factory.create();
 	}
 
-	public Boolean convertToHTML() throws URISyntaxException, IOException,
+	public Path convertToHTML(final String inputFilename) throws URISyntaxException, IOException,
 			InterruptedException {
 
-		// logger.info("convert adoc to html...");
+		logger.info("converting adoc to html...");
 		Map<String, Object> parameters;
 		parameters = options()
 				.backend("html5")
@@ -44,25 +50,24 @@ public class AsciidoctorProcessor {
 								.attribute("allow-uri-read")
 								.attribute("copycss!", "").asMap()).asMap();
 
-		final String result = asciidoctor.render(dataConvertToPDF, parameters);
-		return result.contains("<h1>Document Title");
+        asciidoctor.convert(getResourceAsString(inputFilename),
+                parameters(getOutputDir(), "sample.html", "html5"));
+        return FileSystems.getDefault().getPath(getOutputDir() + "sample.html");
+
+		//return asciidoctor.convert(getResourceAsString(inputFilename), parameters);
 
 	}
 
-	public Boolean convertToPDF() throws URISyntaxException, IOException,
+	public Path convertToPDF(final String inputFilename) throws URISyntaxException, IOException,
 			InterruptedException {
-
-		final String outputDir = getPDFDir();
-		// Files.createDirectory(FileSystems.getDefault().getPath(outputDir));
-		// logger.info("output dir : " + outputDir);
+		logger.info("Converting adoc to PDF to" + getOutputDir());
 
 		// sample adoc to pdf
-		String inputFilename = "adoc/sample.adoc";
 		String outputFilename = "sample.pdf";
 		asciidoctor.convert(getResourceAsString(inputFilename),
-				parameters(outputDir, outputFilename, "pdf"));
-		Path out = FileSystems.getDefault().getPath(outputDir + outputFilename);
-		return Files.exists(out);
+				parameters(getOutputDir(), outputFilename, "pdf"));
+		Path out = FileSystems.getDefault().getPath(getOutputDir() + outputFilename);
+		return out;
 	}
 
 	private Map<String, Object> parameters(String outputDir,
@@ -73,27 +78,12 @@ public class AsciidoctorProcessor {
 	}
 
 
-	private String dataConvertToPDF = "= Document Title\\n Maxime GREAU <greaumaxime@gmail.com>\\n\\nContent : {asciidoctor-version}.\\n[source,java]\\n----\\nSystem.out.println(Hello, World!);\\n----\"";
+    public static final String getOutputDir() {
+        return "/opt/jboss/documents/";
+    }
 
-	/**
-	 * Gets a resourse in a similar way as {@link File#File(String)}
-	 */
-	public File getResource(String pathname) {
-		try {
-			URL resource = Thread.currentThread().getContextClassLoader()
-					.getResource(pathname);
-			if (resource != null) {
-				return new File(Thread.currentThread().getContextClassLoader()
-						.getResource(pathname).toURI());
-			} else {
-				throw new RuntimeException(new FileNotFoundException(pathname));
-			}
-		} catch (URISyntaxException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-	}
 
-	public String getResourceAsString(String path) {
+	private String getResourceAsString(String path) {
 		try {
 			URL resource = Thread.currentThread().getContextClassLoader()
 					.getResource(path);
@@ -108,7 +98,7 @@ public class AsciidoctorProcessor {
 		}
 	}
 
-	public String readFromStream(final InputStream is) {
+	private String readFromStream(final InputStream is) {
 		if (is == null) {
 			return "";
 		}
@@ -134,8 +124,5 @@ public class AsciidoctorProcessor {
 		return out.toString();
 	}
 
-	public static final String getPDFDir() {
-		return "/opt/jboss/wildfly/standalone/data/";
-	}
 
 }

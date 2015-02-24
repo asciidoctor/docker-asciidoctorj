@@ -2,6 +2,8 @@ package org.asciidoctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -25,13 +27,15 @@ public class ConverterServlet extends HttpServlet {
         Boolean htmlOK = false;
         Boolean pdfOK = false;
 		try {
-			htmlOK = asciidoctor.convertToHTML();
-	        pdfOK = asciidoctor.convertToPDF();
+			final Path pathHtml  = asciidoctor.convertToHTML("sample.adoc");
+            htmlOK = (pathHtml != null && Files.exists(pathHtml));
+
+	        final Path path = asciidoctor.convertToPDF("sample.adoc");
+            pdfOK =  (path != null && Files.exists(path));
 		} catch (Exception e) {
 			writer.println(e.getMessage());
 		}
-        
+
         writer.println("HTML : " + htmlOK +  " / PDF : " + pdfOK);
-        
     }
 }

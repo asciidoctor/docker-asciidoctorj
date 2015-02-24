@@ -22,6 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ConverterServletTest {
 
+
 	@Deployment(testable = false)
 	public static WebArchive create() {
 		return ShrinkWrap
@@ -30,8 +31,8 @@ public class ConverterServletTest {
 				.addAsManifestResource("wildfly/MANIFEST.MF", "MANIFEST.MF")
 				.addAsWebInfResource(
 						new File("src/main/resources/adoc/sample.adoc"),
-						"classes/adoc/sample.adoc")
-				.addPackage(VersionServlet.class.getPackage());
+						"classes/sample.adoc")
+				.addPackage(ConverterServlet.class.getPackage());
 	}
 
 	@Test
