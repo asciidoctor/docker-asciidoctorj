@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.asciidoctor</groupId>
-	<artifactId>asciidoctor-wildfly-docker</artifactId>
+	<artifactId>docker-asciidoctorj</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>Asciidoctor WildFly Docker</name>
+	<name>Docker AsciidoctorJ</name>
 	<packaging>war</packaging>
 
 	<properties>
-	        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<arquillian.cube.autostart />
 		<docker.serverIp>127.0.0.1</docker.serverIp>
 		<docker.serverPort>2375</docker.serverPort>
@@ -23,10 +23,12 @@
 		<version.mockito>1.10.8</version.mockito>
 		<version.javaee_7>1.0.1.Final</version.javaee_7>
 		<version.wildfly82>8.2.0.Final</version.wildfly82>
+        <!-- asciidoctor -->
 		<version.asciidoctorj>1.5.2</version.asciidoctorj>
 		<version.asciidoctorj_pdf>1.5.0-alpha.6</version.asciidoctorj_pdf>
 		<version.asciidoctorj_epub3>1.5.0-alpha.4</version.asciidoctorj_epub3>
 		<version.jruby>1.7.16.1</version.jruby>
+        <!-- maven -->
 		<version.war.plugin>2.6</version.war.plugin>
 		<version.surefire.plugin>2.18.1</version.surefire.plugin>
 	</properties>
@@ -97,6 +99,7 @@
 	</dependencyManagement>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.asciidoctor</groupId>
 			<artifactId>asciidoctorj</artifactId>
