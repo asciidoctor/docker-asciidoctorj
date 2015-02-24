@@ -12,7 +12,7 @@
         <property name="dockerContainers">
             wildfly82_dockerfile:
               buildImage:
-                dockerfileLocation: src/test/resources/wildfly/v8.2
+                dockerfileLocation: dockerfiles/wildfly82
                 noCache: true
                 remove: true
               exposedPorts: [8080/tcp, 9990/tcp]
@@ -22,11 +22,12 @@
                 iterations: 5
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
             wildfly82:
-              image: asciidoctor/wildfly82:latest
+              image: asciidoctor/asciidoctorj-wildfly82:latest
               await:
                 strategy: polling
                 sleepPollingTime: 50000
                 iterations: 5
+              volumes: [/tmp]
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
         </property>
     </extension>

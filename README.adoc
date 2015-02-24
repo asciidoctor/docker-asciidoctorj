@@ -7,12 +7,12 @@ ifdef::env-github[:idprefix: user-content-]
 :source-language: java
 :language: {source-language}
 :uri-asciidoctor: {uri-docs}/what-is-asciidoctor
-:uri-repo: https://github.com/mgreau/asciidoctor-wildlfy-docker
+:uri-repo: https://github.com/mgreau/docker-asciidoctorj
 :uri-issues: {uri-repo}/issues
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
 
-*Asciidoctor WildFly Docker* ensure that Asciidoctor projects work into a Java EE Application Server.
+The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by into a Java EE Application Server (WildFly AS for now).
 This repository provides :
 
 * a Dockerfile to build an image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
@@ -22,13 +22,12 @@ This repository provides :
 WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
 
-
 == All in one with Arquillian : Build the Docker image and execute tests in a container
 
 . Clone this project :
 
- $ git clone https://github.com/mgreau/asciidoctor-wildfly-docker.git
- 
+ $ git clone {uri-repo}.git
+
 . Ensure Java, Maven and Docker are installed
 . Execute tests (Build a docker image / Start a container / Execute tests / Stop and destroy the container)
 
@@ -40,15 +39,15 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 . How to build the Docker image with docker command :
 .. Clone this project :
 
- $ git clone https://github.com/mgreau/asciidoctor-wildfly-docker.git
+ $ git clone {uri-repo}.git
 
 .. Build the Docker image
 
-  cd asciidoctor-wildfly-docker
-  docker build -t asciidoctor/wildfly82 src/test/resources/wildfly/v8.2/
+  cd docker-asciidoctorj
+  docker build -t asciidoctor/asciidoctorj-wildfly82 dockerfiles/wildfly82/
 
 . How to execute the Arquillian Tests using an existing Docker image
-.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/wildfly82* is present in your registry.
+.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly* is present in your registry.
 
   docker images
   
