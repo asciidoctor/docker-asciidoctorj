@@ -1,4 +1,4 @@
-= Asciidoctor::WildFly Docker
+= AsciidoctorJ Docker Container
 Maxime Gréau <https://github.com/mgreau[@mgreau]>
 :page-layout: base
 :idprefix:
@@ -26,7 +26,7 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 
 . Clone this project :
 
- $ git clone {uri-repo}.git
+ $ git clone https://github.com/mgreau/docker-asciidoctorj.git
 
 . Ensure Java, Maven and Docker are installed
 . Execute tests (Build a docker image / Start a container / Execute tests / Stop and destroy the container)
@@ -39,7 +39,7 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
 . How to build the Docker image with docker command :
 .. Clone this project :
 
- $ git clone {uri-repo}.git
+ $ git clone https://github.com/mgreau/docker-asciidoctorj.git
 
 .. Build the Docker image
 
