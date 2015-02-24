@@ -12,7 +12,7 @@ ifdef::env-github[:idprefix: user-content-]
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
 
-The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by into a Java EE Application Server (WildFly AS for now). +
+The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by apps into a Java EE Application Server (WildFly AS for now). +
 This repository provides :
 
 * a Dockerfile to build an image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
