@@ -12,14 +12,14 @@ ifdef::env-github[:idprefix: user-content-]
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
 
-The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by into a Java EE Application Server (WildFly AS for now).
+The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by into a Java EE Application Server (WildFly AS for now). +
 This repository provides :
 
 * a Dockerfile to build an image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
 * Arquillian tests that used a docker container to convert AsciiDoc files to HTML and PDF files 
 
 +
-WARNING: asciidoctorj-epub3 is not working yet in this configuration.
+WARNING: asciidoctorj-epub3 is not working yet with this configuration.
 
 
 == All in one with Arquillian : Build the Docker image and execute tests in a container
@@ -47,7 +47,7 @@ WARNING: asciidoctorj-epub3 is not working yet in this configuration.
   docker build -t asciidoctor/asciidoctorj-wildfly82 dockerfiles/wildfly82/
 
 . How to execute the Arquillian Tests using an existing Docker image
-.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly* is present in your registry.
+.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly82* is present in your registry.
 
   docker images
   
