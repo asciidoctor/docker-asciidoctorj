@@ -12,7 +12,20 @@ Maxime Gréau
 
 TIP: Language EN / Timereading 5 mn
 
-It's been a wile since I wrote a post but like many technical bloggers (I guess) I've a lot of blog post on a drfat version.
+It's been a while  since I wrote here but like many technicals blogger (I guess), I've a lot of blog posts on draft mode and I've a lot to write about 2014 which was 
+an *amazing year* since thanks to the Asciidoctor project and Java EE 7 / WildFly technologies I speaked at DevNationn, San Francisco :)  but I'll blog about it soon.
+
+So what about this post ?
+
+You've just read the title and you said "Oh no ! Not another post about Docker!", and I want to answer "Well, it's 2015 Is it possible to blog without it's more a blog post about Asciidoctor and how Docker helps us to check that AsciidoctorJ can be execute into a Java EE application server like WildFly.
+So it's not a post about Docker itself but how 
+
+We will be talk about :
+- Asciidoctor / AsciidoctorJ
+- Docker
+- Arquillian and Arquillian Cube
+- WildFly AS
+
 
 [NOTE]
 .This post explains how we use Docker and Arquillian to check that AsciidoctorJ works into WildFly AS
