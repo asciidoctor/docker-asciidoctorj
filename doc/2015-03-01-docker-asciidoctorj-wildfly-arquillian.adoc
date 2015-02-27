@@ -49,6 +49,8 @@ pass::[more]
 
 == Asciidoctor / AsciidoctorJ
 
+I guess that I don't need to introduce Asciidoctor now that it became so popular since it's was started by Dan Allen at the end of 2012.
+But 
 Like you know now, Asciidoctor is a toolchain that give you the 
 
 ----
@@ -89,6 +91,7 @@ We are waiting for PR :)
 
 The good news here is that the asciidoctor project now have an easy way to test if the future versions will be compatible with this architecture.
 The other good news is that the 
-Feel free to contact Guillaume Scheilorger or me if you have 
+
+Have fun with Asciidoctor, Arquillian and Docker :)
 
  
