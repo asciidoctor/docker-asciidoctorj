@@ -1,8 +1,14 @@
-= How Arquillian and Docker are used to ensure that AsciidoctorJ works into WildFly AS
+= Asciidoctor uses Arquillian and Docker to easily ensure that AsciidoctorJ works into WildFly AS
 Maxime Gréau
 2015-03-01
+:toc2: left
 :awestruct-layout: post
 :awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
+:link-asciidoctor-docker-hub: https://registry.hub.docker.com/repos/asciidoctor/
+:link-asciidoctor: http://asciidoctor.org
+:link-arquillian-cube-github: https://github.com/arquillian/arquillian-cube
+:link-jboss-wildfly-docker: https://registry.hub.docker.com/u/jboss/wildfly/
+:link-docker: http://docker.com
 
 TIP: Language EN / Timereading 5 mn
 
@@ -12,8 +18,9 @@ It's been a wile since I wrote a post but like many technical bloggers (I guess)
 .This post explains how we use Docker and Arquillian to check that AsciidoctorJ works into WildFly AS
 ====
 * docker-asciidoctorj project
-* Arquillian
+* Asciidoctor Docker
 * WildFly AS
+* Arquillian Cube extension 
 ====
 
 pass::[more]
@@ -28,8 +35,34 @@ AsciidoctorJ is the JVM implementation
 The problem is that if you want to include AsciidoctorJ in your Java application, it's not easy. Indeed, AsciidoctorJ is base on JRUby and 
 we have some classloader troubles with JRuby see bugs here =>
 
+== How we solve it 
 
-== Want to test AsciidoctorJ on another application server ? 
+We tried 
 
-If you're using another Java application server than WildFly AS like TomEE...feel free to fork the project and quicly tests if it works into
-yout application server, 
+=== How to test it easily 
+
+=== Arquillian Cube extension
+
+Arquillian Cube is an Aq
+TODO => schema
+TODO => exemple code
+
+== AsciidoctorJ in another application server ? 
+
+It seems that the JRuby classloader problem is solve with the use of JBoss Modules components but if you want to quickly 
+If you're using another Java application server than WildFly AS like TomEE...feel free to fork the project and quickly tests if it works into
+application server, here are the steps to follow :
+ - Create a Dockerfile in a +dockerfiles+ subfolder, following the named convention +{appservername}{version}+
+ - Update the arquillian XML file to add a docker container
+ - Update the pom.xml to add Maven profiles related to the application server
+ - Execute tests
+
+We are waiting for PR :)
+
+== Conclusion
+
+The good news here is that the asciidoctor project now have an easy way to test if the future versions will be compatible with this architecture.
+The other good news is that the 
+Feel free to contact Guillaume Scheilorger or me if you have 
+
+ 
