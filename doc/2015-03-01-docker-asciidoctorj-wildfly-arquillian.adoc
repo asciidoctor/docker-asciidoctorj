@@ -3,71 +3,65 @@ Maxime Greau <greau.maxime@gmail.com>
 v1.0, March 01, 2015: First English version
 :awestruct-layout: post
 :awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
-:toc:
+:toc2:
 :toc-placement: preamble
 :toc-title: Table of Contents
 :source-highlighter: coderay
 :experimental:
 :mdash: &#8212;
 :language: asciidoc
+:link-docker-asciidoctorj-github: http://github.com/mgreau/docker-asciidoctorj
 :link-asciidoctor-docker-hub: https://registry.hub.docker.com/repos/asciidoctor/
 :link-asciidoctor: http://asciidoctor.org
 :link-arquillian-cube-github: https://github.com/arquillian/arquillian-cube
 :link-jboss-wildfly-docker: https://registry.hub.docker.com/u/jboss/wildfly/
 :link-docker: http://docker.com
-:link-asciidoctorj-bug1: 
-:link-asciidoctorj-bug2: 
-:link-asciidoctorj-wildflyas-install: http://asciidoctor.org/docs/asciidoctorj/#running-asciidoctorj-on-wildfly-as 
+:link-asciidoctorj-bug1: http://github.com/asciidoctor/asciidoctorj/issues
+:link-asciidoctorj-bug2: http://github.com/asciidoctor/asciidoctorj/issues
+:link-asciidoctorj-wildflyas-install: http://asciidoctor.org/docs/asciidoctorj/#running-asciidoctorj-on-wildfly-as
 
 TIP: Language EN / Timereading 5 mn
 
-It's been a while  since I wrote here but like many technicals blogger (I guess), I've a lot of blog posts on draft mode and I've a lot to write about 2014 which was 
-an *amazing year* since thanks to the Asciidoctor project and Java EE 7 / WildFly technologies I speaked at DevNationn, San Francisco :)  but I'll blog about it soon.
+[NOTE]
+.This post explains how we execute Arquillian tests into a Docker container to check that AsciidoctorJ works into WildFly AS. So it is about :
+====
+* {}[docker-asciidoctorj], the dedicated project to deal w from Asciidoctor organization
+* arquillian-cube, the project from Arquillian community
+* the WildFly docker image from JBoss
+====
 
-So what about this post ?
+It's been a while since I wrote here but like many technicals blogger (I guess), I've a lot of blog posts on draft mode and I've a lot to write about 2014 which was
+an *amazing year* since thanks to the *Asciidoctor project* and *Java EE 7 / WildFly* technologies, I had 2 talks at DevNation, San Francisco to pseak about Open Source projects :)  but I'll blog about it soon.
+
+*So what about this post ?*
 
 You've just read the title and you said "Oh no ! Not another post about Docker!", and I want to answer "Well, it's 2015 Is it possible to blog without it's more a blog post about Asciidoctor and how Docker helps us to check that AsciidoctorJ can be execute into a Java EE application server like WildFly.
-So it's not a post about Docker itself but how 
+So it's not a post about Docker itself but how
 
-We will be talk about :
-- Asciidoctor / AsciidoctorJ
-- Docker
-- Arquillian and Arquillian Cube
-- WildFly AS
-
-
-[NOTE]
-.This post explains how we use Docker and Arquillian to check that AsciidoctorJ works into WildFly AS
-====
-* docker-asciidoctorj project
-* Asciidoctor Docker
-* WildFly AS
-* Arquillian Cube extension 
-====
 
 pass::[more]
 
 == Asciidoctor / AsciidoctorJ
 
 I guess that I don't need to introduce Asciidoctor now that it became so popular since it's was started by Dan Allen at the end of 2012.
-But 
-Like you know now, Asciidoctor is a toolchain that give you the 
+But
+Like you know now, Asciidoctor is a toolchain that give you the
 
 ----
-AsciidoctorJ is the official library for running Asciidoctor on the JVM. 
+AsciidoctorJ is the official library for running Asciidoctor on the JVM.
 Using AsciidoctorJ, you can convert AsciiDoc content or analyze the structure of a parsed AsciiDoc document from Java and other JVM languages
 ----
 
 == So what's the problem ?
 
-The problem is that if you want to include AsciidoctorJ in your Java application, it's not easy. Indeed, AsciidoctorJ is base on JRUby and 
+The problem is that if you want to include AsciidoctorJ in your Java application, it's not easy. Indeed, AsciidoctorJ is base on JRUby and
 we have some classloader troubles with JRuby see bugs here =>
 
-== How we solve it 
+== How we solve it
 
-We tried 
+We tried
 
-=== How to test it easily 
+=== How to test it easily
 
 === Arquillian Cube extension
 
@@ -75,9 +69,9 @@ Arquillian Cube is an Aq
 TODO => schema
 TODO => exemple code
 
-== AsciidoctorJ in another application server ? 
+== AsciidoctorJ in another application server ?
 
-It seems that the JRuby classloader problem is solve with the use of JBoss Modules components but if you want to quickly 
+It seems that the JRuby classloader problem is solve with the use of JBoss Modules components but if you want to quickly
 If you're using another Java application server than WildFly AS like TomEE...feel free to fork the project and quickly tests if it works into
 application server, here are the steps to follow :
  - Create a Dockerfile in a +dockerfiles+ subfolder, following the named convention +{appservername}{version}+
@@ -90,8 +84,6 @@ We are waiting for PR :)
 == Conclusion
 
 The good news here is that the asciidoctor project now have an easy way to test if the future versions will be compatible with this architecture.
-The other good news is that the 
+The other good news is that the
 
 Have fun with Asciidoctor, Arquillian and Docker :)
-
- 
