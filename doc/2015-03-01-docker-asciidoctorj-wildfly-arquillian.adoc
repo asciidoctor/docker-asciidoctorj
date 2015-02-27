@@ -41,7 +41,7 @@ So it's not a post about Docker itself but how
 
 pass::[more]
 
-== Asciidoctor / AsciidoctorJ
+== Asciidoctor on the JVM with AsciidoctorJ
 
 I guess that I don't need to introduce Asciidoctor now that it became so popular since it's was started by Dan Allen at the end of 2012.
 But
