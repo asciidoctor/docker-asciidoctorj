@@ -1,14 +1,23 @@
 = Asciidoctor uses Arquillian and Docker to easily ensure that AsciidoctorJ works into WildFly AS
-Maxime Gréau
-2015-03-01
-:toc2: left
+Maxime Greau <greau.maxime@gmail.com>
+v1.0, March 01, 2015: First English version
 :awestruct-layout: post
 :awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
+:toc:
+:toc-placement: preamble
+:toc-title: Table of Contents
+:source-highlighter: coderay
+:experimental:
+:mdash: &#8212;
+:language: asciidoc
 :link-asciidoctor-docker-hub: https://registry.hub.docker.com/repos/asciidoctor/
 :link-asciidoctor: http://asciidoctor.org
 :link-arquillian-cube-github: https://github.com/arquillian/arquillian-cube
 :link-jboss-wildfly-docker: https://registry.hub.docker.com/u/jboss/wildfly/
 :link-docker: http://docker.com
+:link-asciidoctorj-bug1: 
+:link-asciidoctorj-bug2: 
+:link-asciidoctorj-wildflyas-install: http://asciidoctor.org/docs/asciidoctorj/#running-asciidoctorj-on-wildfly-as 
 
 TIP: Language EN / Timereading 5 mn
 
@@ -41,7 +50,11 @@ pass::[more]
 == Asciidoctor / AsciidoctorJ
 
 Like you know now, Asciidoctor is a toolchain that give you the 
-AsciidoctorJ is the JVM implementation 
+
+----
+AsciidoctorJ is the official library for running Asciidoctor on the JVM. 
+Using AsciidoctorJ, you can convert AsciiDoc content or analyze the structure of a parsed AsciiDoc document from Java and other JVM languages
+----
 
 == So what's the problem ?
 
@@ -68,7 +81,7 @@ application server, here are the steps to follow :
  - Create a Dockerfile in a +dockerfiles+ subfolder, following the named convention +{appservername}{version}+
  - Update the arquillian XML file to add a docker container
  - Update the pom.xml to add Maven profiles related to the application server
- - Execute tests
+ - Execute tests and see the results
 
 We are waiting for PR :)
 
