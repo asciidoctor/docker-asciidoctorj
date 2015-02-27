@@ -1,13 +1,15 @@
-= Arquillian tests with Docker to run AsciidoctorJ into WildFly AS
+= How Arquillian and Docker are used to ensure that AsciidoctorJ works into WildFly AS
 Maxime Gréau
 2015-03-01
 :awestruct-layout: post
-  :awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
+:awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
 
 TIP: Language EN / Timereading 5 mn
 
+It's been a wile since I wrote a post but like many technical bloggers (I guess) I've a lot of blog post on a drfat version.
+
 [NOTE]
-.This post presents, as a diagram, all Java EE standards supported in each JBoss EAP version : 
+.This post explains how we use Docker and Arquillian to check that AsciidoctorJ works into WildFly AS
 ====
 * docker-asciidoctorj project
 * Arquillian
@@ -16,5 +18,18 @@ TIP: Language EN / Timereading 5 mn
 
 pass::[more]
 
-You can *click on each component to access the Java Specification Requests (JSRs)* details or move to the complete lists.
+== Asciidoctor / AsciidoctorJ
 
+Like you know now, Asciidoctor is a toolchain that give you the 
+AsciidoctorJ is the JVM implementation 
+
+== So what's the problem ?
+
+The problem is that if you want to include AsciidoctorJ in your Java application, it's not easy. Indeed, AsciidoctorJ is base on JRUby and 
+we have some classloader troubles with JRuby see bugs here =>
+
+
+== Want to test AsciidoctorJ on another application server ? 
+
+If you're using another Java application server than WildFly AS like TomEE...feel free to fork the project and quicly tests if it works into
+yout application server, 
