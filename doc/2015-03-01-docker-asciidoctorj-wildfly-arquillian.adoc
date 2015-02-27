@@ -1,0 +1,20 @@
+= Arquillian tests with Docker to run AsciidoctorJ into WildFly AS
+Maxime Gréau
+2015-03-01
+:awestruct-layout: post
+  :awestruct-tags: [asciidoctor, docker, wildfly, arquillian]
+
+TIP: Language EN / Timereading 5 mn
+
+[NOTE]
+.This post presents, as a diagram, all Java EE standards supported in each JBoss EAP version : 
+====
+* docker-asciidoctorj project
+* Arquillian
+* WildFly AS
+====
+
+pass::[more]
+
+You can *click on each component to access the Java Specification Requests (JSRs)* details or move to the complete lists.
+
