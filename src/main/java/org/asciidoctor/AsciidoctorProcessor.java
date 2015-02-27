@@ -39,23 +39,10 @@ public class AsciidoctorProcessor {
 			InterruptedException {
 
 		logger.info("converting adoc to html...");
-		Map<String, Object> parameters;
-		parameters = options()
-				.backend("html5")
-				.safe(SafeMode.UNSAFE)
-				.headerFooter(true)
-				.eruby("erubis")
-				.attributes(
-						AttributesBuilder.attributes().attribute("icons!", "")
-								.attribute("allow-uri-read")
-								.attribute("copycss!", "").asMap()).asMap();
 
         asciidoctor.convert(getResourceAsString(inputFilename),
                 parameters(getOutputDir(), "sample.html", "html5"));
         return FileSystems.getDefault().getPath(getOutputDir() + "sample.html");
-
-		//return asciidoctor.convert(getResourceAsString(inputFilename), parameters);
-
 	}
 
 	public Path convertToPDF(final String inputFilename) throws URISyntaxException, IOException,
