@@ -15,6 +15,7 @@ v1.0, March 01, 2015: First English version
 :language: asciidoc
 :includedir: _includes
 :icons: font
+:images: ./images/
 //Refs
 :link-devnation-talk: http://www.devnation.org/2014/#websocketAsciidoctor
 :link-devnation-bof: http://www.devnation.org/2014/#bofWildfly8
@@ -51,7 +52,12 @@ It's been a while since I +wrote+ here but like many technicals blogger (I guess
 an *AMAZING year* : indeed, thanks to the {uri-asciidoctor}[*Asciidoctor project*] and +Java EE 7 / WildFly+ technologies, I gave *2 talks* at {link-devnation-talk}[+DevNation, San Francisco+] to speak about Open Source projects :)  +
 But I'll blog about it +awesome experience+ soon.
 
-*So what this post is about : Docker ? Asciidoctor ?*
+*So what this post is about : Docker ? Asciidoctor ? Arquillian ?*
+
+[[docker_arquillian_asciidoctor]]
+.The power of Arquillian & Docker for testing AsciidoctorJ
+image::docker-arquillian-asciidoctor.svg[AsciidoctorJ Docker containers managed by Arquillian,550]
+
 
 You've just read the title and you said : +
 
