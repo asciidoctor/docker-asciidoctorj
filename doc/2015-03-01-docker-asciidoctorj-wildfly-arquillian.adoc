@@ -56,9 +56,7 @@ But I'll blog about it +awesome experience+ soon.
 
 [[docker_arquillian_asciidoctor]]
 .The power of Arquillian & Docker for testing AsciidoctorJ
-image::docker-arquillian-asciidoctor.svg[]
-
-include::images/docker-arquillian-asciidoctor.svg[]
+image::docker-arquillian-asciidoctor.png[AsciidoctorJ Docker containers managed by Arquillian,550]
 
 You've just read the title and you said : +
 
