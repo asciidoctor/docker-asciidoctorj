@@ -66,7 +66,7 @@ public class AsciidoctorProcessor {
 
 
     public static final String getOutputDir() {
-        return "/documents/";
+        return "/tmp/";
     }
 
 

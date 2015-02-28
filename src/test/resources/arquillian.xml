@@ -28,6 +28,10 @@
                 sleepPollingTime: 50000
                 iterations: 5
               volumes: [/tmp]
+              beforeStop:
+                - copy:
+                  from: /tmp
+                  to: /tmp
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
         </property>
     </extension>
