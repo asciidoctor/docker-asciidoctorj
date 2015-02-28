@@ -19,7 +19,7 @@ RUN mkdir -p ${JBOSS_HOME}/modules/org/asciidoctor/main
 ENV ASCIIDOCTORJ_MODULE /opt/jboss/wildfly/modules/org/asciidoctor/main
 
 # Output directory to store generated files
-ENV OUTPUT_DIRECTORY /opt/jboss/documents
+ENV OUTPUT_DIRECTORY /documents
 RUN mkdir -p ${OUTPUT_DIRECTORY}
 
 # Set the ULR_BASE env variable to download artifacts
