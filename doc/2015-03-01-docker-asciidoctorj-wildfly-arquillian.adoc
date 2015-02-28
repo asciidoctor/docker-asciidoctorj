@@ -6,6 +6,7 @@ v1.0, March 01, 2015: First English version
 :toc2:
 :toc-placement: preamble
 :toc-title: Table of Contents
+:toclevels: 4
 :source-highlighter: coderay
 :linkattrs:
 :sectanchors:
@@ -44,6 +45,7 @@ TIP: Language *_EN_* /  Timereading *_5 mn_*
 This post explains how we execute Arquillian tests into a Docker container, so we'll talk about :
 
 * {uri-docker-asciidoctorj-github}[docker-asciidoctorj], the dedicated project on Asciidoctor organization
+* {uri-asciidoctor-dockerhub}[the Asciidoctor organization on Docker Hub],
 * {uri-arquillian-cube-github}[Arquillian Cube], the Arquillian extension that can be used to manager Docker containers from Arquillian.
 * {uri-jboss-wildfly-docker}[the WildFly docker image] from JBoss
 ====
@@ -86,8 +88,6 @@ Using AsciidoctorJ, you can convert AsciiDoc content or analyze the structure of
 .Asciidoctor on the JVM with AsciidoctorJ
 image::{uri-asciidoctorj-diagram}[Diagram which explains how AsciidoctorJ makes Asciidoctor works on the JVM,550]
 
-TODO => add diagram
-
 == AsciidoctorJ in a Java application server ?
 
 So here we have a problem 
@@ -104,13 +104,17 @@ We tried
 
 === The power of Arquillian & Docker
 
-==== Arquillian Cube extension
+OK so we have a solution but there are several manual steps to follow in order to have 
 
-Arquillian Cube is an Aq
+==== Arquillian Cube extension to the rescue !
+
+Arquillian Cube is a very cool project developed by Alex Soto and the Arquillian community
 TODO => schema
 TODO => exemple code
 
 ==== Docker AsciidoctorJ project in details
+
+Thanks to the 
 
 The project layout is as follows :
 
@@ -175,7 +179,7 @@ ENV ASCIIDOCTORJ_MODULE /opt/jboss/wildfly/modules/org/asciidoctor/main
 ENV OUTPUT_DIRECTORY /opt/jboss/documents
 RUN mkdir -p ${OUTPUT_DIRECTORY}
 
-# Set the ULR_BASE env variable to download artifacts
+# Set the URL_BASE env variable to download artifacts
 ENV URL_BASE https://repo1.maven.org/maven2/
 
 ADD module.xml ${ASCIIDOCTORJ_MODULE}/module.xml
@@ -200,6 +204,48 @@ CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0
 
 ====
 
+===== Used the Docker image from a registry (remote or local)
+
+. How to build the Docker image with docker command :
+.. Clone this project :
+
+ $ git clone https://github.com/mgreau/docker-asciidoctorj.git
+
+.. Build the Docker image
+
+  cd docker-asciidoctorj
+  docker build -t asciidoctor/asciidoctorj-wildfly82 dockerfiles/wildfly82/
+
+. How to execute the Arquillian Tests using an existing Docker image
+.. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly82* is present in your registry.
+
+  docker images
+  
+.. Execute tests (Start a container / Execute tests / Stop and destroy the container)
+
+  mvn clean test -Pwildfly82
+  
+[IMPORTANT]
+====
+ Until the Docker image is present in your registry, you can just execute the Maven command (2b) !
+====
+
+===== All in one with Arquillian : Build the Docker image and execute tests in a container
+
+. Clone this project :
+
+ $ git clone https://github.com/mgreau/docker-asciidoctorj.git
+
+. Ensure Java, Maven and Docker are installed
+. Execute tests (Build a docker image / Start a container / Execute tests / Stop and destroy the container)
+
+  mvn clean test -Pwildfly82_dockerfile
+
+If you want to customize the container, you can update the dockerfile and re-lauch the Maven command
+
+===== Convert AsciiDoc to PDF and HTML5 
+
+The tests are very basic for now, they will convert the same sample.adoc file to sample.pdf 
 
 == AsciidoctorJ in your favorite Java application server ?
 
@@ -217,7 +263,7 @@ application server, here are the steps to follow :
 If you do it, I'd love to have your feedbacks so feel free to add a comment here, on the discussion list or on the GitHub project. +
 We are waiting for PR :)
 
-== Asciidoctor has is own official registry on Docker Hub
+== Asciidoctor has its own official registry on Docker Hub
 
 The good news here is that the asciidoctor project now have an easy way to test if the future versions will be compatible with this architecture.
 The other good news is that the
