@@ -1,0 +1,35 @@
+mgreau@mgreau-osxubuntu:~/git/asciidoctor/docker-asciidoctorj$ mvn clean test -Pwildfly82
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Docker AsciidoctorJ 1.0.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+...
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running org.asciidoctor.ConverterServletTest
+Mar 01, 2015 10:31:47 PM org.jboss.arquillian.container.impl.MapObject populate
+WARNING: Configuration contain properties not supported by the backing object org.jboss.as.arquillian.container.remote.RemoteContainerConfiguration
+Unused property entries: {host=127.0.0.1, target=wildfly:8.2.0.Final:remote}
+Supported property names: [managementAddress, password, managementPort, managementProtocol, username]
+Mar 01, 2015 10:32:39 PM org.xnio.Xnio <clinit>
+INFO: XNIO version 3.2.0.Beta4
+Mar 01, 2015 10:32:39 PM org.xnio.nio.NioXnio <clinit>
+INFO: XNIO NIO Implementation Version 3.2.0.Beta4
+Mar 01, 2015 10:32:39 PM org.jboss.remoting3.EndpointImpl <clinit>
+INFO: JBoss Remoting version (unknown)
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 65.087 sec - in org.asciidoctor.ConverterServletTest
+
+Results :
+
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:19 min
+[INFO] Finished at: 2015-03-01T22:33:01+01:00
+[INFO] Final Memory: 37M/356M
+[INFO] ------------------------------------------------------------------------

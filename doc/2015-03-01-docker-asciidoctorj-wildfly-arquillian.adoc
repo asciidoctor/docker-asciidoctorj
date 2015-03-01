@@ -102,7 +102,7 @@ JRuby noticing that "asciidoctor gem is not available"
 
 We tried
 
-=== Make to easy thanks to the power of Arquillian & Docker
+=== Make it easy thanks to the power of Arquillian & Docker
 
 OK so we have a solution but there are several manual steps to follow in order to have 
 
@@ -110,11 +110,11 @@ OK so we have a solution but there are several manual steps to follow in order t
 
 Arquillian Cube is a very cool project developed by Alex Soto and the Arquillian community
 TODO => schema
-TODO => exemple code
+
 
 ==== Docker AsciidoctorJ project in details
 
-Thanks to the 
+
 
 The project layout is as follows :
 
@@ -132,21 +132,23 @@ The project layout is as follows :
       |- ConverterServlet.java   // <3>
 + src/main/resources
    |+ adoc
-      |- sample.adoc   // <5>
+      |- sample.adoc   // <4>
 + src/test/java
    |+ org.asciidoctor
-      |- ConverterServletTest.java   // <4>
+      |- ConverterServletTest.java   // <5>
 + src/test/resources
    |+ wildfly
-      |- MANIFEST.MF   // <5>
-   |- arquillian.xml   
+      |- MANIFEST.MF   // <6>
+   |- arquillian.xml   // <7>
 pom.xml		
 ----
-<1> TODO
-<2> TODO
-<3> TODO 
-<4> TODO
-<5> TODO
+<1> Dockerfile for AsciidoctorJ into WildFly 8.2
+<2> Java Class which convert AsciiDoc file into HTML or PDf file
+<3> Java Servlet which used the converter
+<4> Sample AsciiDoc file
+<5> Tests to check that AsciidoctorJ works
+<6> MANIFEST file to depend on AsciidoctorJ WilFly AS module
+<7> XML file to configure Arquillian tests
 ====
 
 
@@ -176,8 +178,7 @@ RUN mkdir -p ${JBOSS_HOME}/modules/org/asciidoctor/main
 ENV ASCIIDOCTORJ_MODULE /opt/jboss/wildfly/modules/org/asciidoctor/main
 
 # Output directory to store generated files
-ENV OUTPUT_DIRECTORY /opt/jboss/documents
-RUN mkdir -p ${OUTPUT_DIRECTORY}
+ENV OUTPUT_DIRECTORY /tmp
 
 # Set the URL_BASE env variable to download artifacts
 ENV URL_BASE https://repo1.maven.org/maven2/
@@ -203,6 +204,8 @@ CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0
 <4> TODO
 
 ====
+
+TODO => exemple code
 
 ===== Used the Docker image from a registry (remote or local)
 
@@ -242,42 +245,7 @@ jboss/wildfly                             8.2.0.Final         24c5b96027df      
 [[eg4-callouts]]
 .Test executed with Maven
 ====
-mgreau@mgreau-osxubuntu:~/git/asciidoctor/docker-asciidoctorj$ mvn clean test -Pwildfly82
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Docker AsciidoctorJ 1.0.0-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
-[INFO]
-...
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running org.asciidoctor.ConverterServletTest
-Mar 01, 2015 10:31:47 PM org.jboss.arquillian.container.impl.MapObject populate
-WARNING: Configuration contain properties not supported by the backing object org.jboss.as.arquillian.container.remote.RemoteContainerConfiguration
-Unused property entries: {host=127.0.0.1, target=wildfly:8.2.0.Final:remote}
-Supported property names: [managementAddress, password, managementPort, managementProtocol, username]
-Mar 01, 2015 10:32:39 PM org.xnio.Xnio <clinit>
-INFO: XNIO version 3.2.0.Beta4
-Mar 01, 2015 10:32:39 PM org.xnio.nio.NioXnio <clinit>
-INFO: XNIO NIO Implementation Version 3.2.0.Beta4
-Mar 01, 2015 10:32:39 PM org.jboss.remoting3.EndpointImpl <clinit>
-INFO: JBoss Remoting version (unknown)
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 65.087 sec - in org.asciidoctor.ConverterServletTest
-
-Results :
-
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 01:19 min
-[INFO] Finished at: 2015-03-01T22:33:01+01:00
-[INFO] Final Memory: 37M/356M
-[INFO] ------------------------------------------------------------------------
-
+include::log_maven_build.txt[lines=5..10]
 ====
   
 [IMPORTANT]
