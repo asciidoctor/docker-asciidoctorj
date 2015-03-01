@@ -28,10 +28,11 @@
                 sleepPollingTime: 50000
                 iterations: 5
               volumes: [/tmp]
-              beforeStop:
-                - copy:
-                  from: /tmp
-                  to: /tmp
+             # bug with this configuration
+             # beforeStop:
+             #   - copy:
+             #     from: /tmp
+             #     to: /tmp
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
         </property>
     </extension>
@@ -39,7 +40,7 @@
     <container qualifier="wildfly82" default="true">
         <configuration>
             <property name="target">wildfly:8.2.0.Final:remote</property>
-            <property name="managementServer">${docker.serverIp}</property>
+            <property name="host">dockerServerIp</property>
             <property name="managementPort">9991</property>
             <property name="username">admin</property>
             <property name="password">Admin#70365</property>
