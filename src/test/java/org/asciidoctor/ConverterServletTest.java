@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -43,15 +44,29 @@ public class ConverterServletTest {
 	}
 
 	@Test
-	public void should_convert(@ArquillianResource URL base) throws IOException {
-		URL url = new URL(base, "convert");
+	public void should_convert_to_html(@ArquillianResource URL base) throws IOException {
+        URL url = createURL(base, "convert", "html", "sample.adoc");
 		assertThat(getResponse(url),
-				is("HTML : true / PDF : true"));
+				is("HTML : true"));
 	}
+
+    @Test
+    public void should_convert_to_pdf(@ArquillianResource URL base) throws IOException {
+        URL url = createURL(base, "convert", "pdf", "sample.adoc");
+        assertThat(getResponse(url),
+                is("PDF : true"));
+    }
+
+    private URL createURL(URL base, String path, String converter, String filename) throws IOException{
+        final String query =  "converter=" + converter + "&"
+                 + "filename=" + filename;
+        return new URL(base, path + "?" + query );
+    }
 
 	private String getResponse(URL url) {
 		StringBuffer response = new StringBuffer();
 		HttpURLConnection con;
+
 		try {
 			con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -63,7 +78,6 @@ public class ConverterServletTest {
 			}
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return response.toString();

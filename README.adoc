@@ -54,6 +54,11 @@ WARNING: asciidoctorj-epub3 is not working yet with this configuration.
 .. Execute tests (Start a container / Execute tests / Stop and destroy the container)
 
   mvn clean test -Pwildfly82
+
+... You can execute just one test (AsciiDoc to PDf for example)
+
+   mvn clean test -Pwildfly82 -Dtest=ConverterServletTest#should_convert_to_pdf
+
   
 [IMPORTANT]
 ====

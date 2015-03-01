@@ -20,22 +20,54 @@ public class ConverterServlet extends HttpServlet {
     @Inject
     private AsciidoctorProcessor asciidoctor;
 
+    private static final String CONVERTER_PARAMETER = "converter";
+
+    private static final String FILENAME_PARAMETER = "filename";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
         PrintWriter writer = resp.getWriter();
-        Boolean htmlOK = false;
-        Boolean pdfOK = false;
-		try {
-			final Path pathHtml  = asciidoctor.convertToHTML("sample.adoc");
+
+        String asciidocFile = "sample.adoc";
+        if (req.getParameter(FILENAME_PARAMETER) != null){
+            asciidocFile = req.getParameter(FILENAME_PARAMETER);
+        }
+
+        if (req.getParameter(CONVERTER_PARAMETER) != null &&  "pdf".equals(req.getParameter(CONVERTER_PARAMETER))){
+            writer.println(convertToPDF(asciidocFile));
+        }
+        else {
+            writer.println(convertToHTML(asciidocFile));
+        }
+    }
+
+    private String convertToPDF(String asciidocFile){
+        String result = "PDF : ";
+        Boolean pdfOK ;
+
+        try {
+            final Path path = asciidoctor.convertToPDF(asciidocFile);
+            pdfOK =  (path != null && Files.exists(path));
+
+        } catch (Exception e) {
+            return result + (e.getMessage());
+        }
+
+        return result + pdfOK;
+    }
+
+    private String convertToHTML(String asciidocFile){
+        String result = "HTML : ";
+        Boolean htmlOK ;
+        try {
+            final Path pathHtml  = asciidoctor.convertToHTML(asciidocFile);
             htmlOK = (pathHtml != null && Files.exists(pathHtml));
 
-	        final Path path = asciidoctor.convertToPDF("sample.adoc");
-            pdfOK =  (path != null && Files.exists(path));
-		} catch (Exception e) {
-			writer.println(e.getMessage());
-		}
+        } catch (Exception e) {
+           return result + (e.getMessage());
+        }
 
-        writer.println("HTML : " + htmlOK +  " / PDF : " + pdfOK);
+        return result + htmlOK;
     }
 }
