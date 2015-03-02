@@ -20,6 +20,10 @@
                 strategy: polling
                 sleepPollingTime: 50000
                 iterations: 5
+              beforeStop:
+                - copy:
+                    from: /tmp/documents
+                    to: /tmp
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
             wildfly82:
               image: asciidoctor/asciidoctorj-wildfly82:latest
@@ -27,12 +31,10 @@
                 strategy: polling
                 sleepPollingTime: 50000
                 iterations: 5
-              volumes: [/tmp]
-             # bug with this configuration
-             # beforeStop:
-             #   - copy:
-             #     from: /tmp
-             #     to: /tmp
+              beforeStop:
+                - copy:
+                    from: /tmp/documents
+                    to: /tmp
               portBindings: [8081->8080/tcp, 9991->9990/tcp]
         </property>
     </extension>
