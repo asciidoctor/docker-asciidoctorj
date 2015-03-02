@@ -26,10 +26,11 @@ v1.0, March 01, 2015: First English version
 :uri-asciidoctor: http://asciidoctor.org
 :uri-asciidoctor-list: http://discuss.asciidoctor.org/
 :uri-asciidoctor-dockerhub: https://registry.hub.docker.com/repos/asciidoctor/
+:uti-asciidoctor-processor-diagram: https://github.com/mojavelinux/decks/blob/master/discover-zen-writing-asciidoc/images/asciidoc-processor.png
 :uri-asciidoctorj: https://github.com/asciidoctor/asciidoctorj
-:uri-asciidoctorj-diagram: https://raw.githubusercontent.com/mgreau/slides/master/websocket-asciidoctor/NantesJUG/images/asciidoctor-java.png
+:uri-asciidoctorj-processor-diagram: https://raw.githubusercontent.com/mgreau/slides/master/websocket-asciidoctor/NantesJUG/images/asciidoctor-java.png
 :uri-asciidoctorj-doc: http://asciidoctor.org/docs/asciidoctorj/
-:uri-docker-asciidoctorj-github: http://github.com/mgreau/docker-asciidoctorj
+:uri-docker-asciidoctorj-github: http://github.com/asciidoctor/docker-asciidoctorj
 :uri-asciidoctor-docker-hub: https://registry.hub.docker.com/repos/asciidoctor/
 :uri-asciidoctor: http://asciidoctor.org
 :uri-arquillian-cube-github: https://github.com/arquillian/arquillian-cube
@@ -53,47 +54,51 @@ This post explains how we execute Arquillian tests into a Docker container, so w
 * {uri-jboss-wildfly-docker}[the WildFly docker image] from JBoss
 ====
 
-It's been a while since I +wrote+ here but like many technicals blogger (I guess), I've a lot of blog posts on draft mode. And I've a lot to write about 2014 which was
+It's been a while since I wrote here but like many technicals blogger (I guess), I've a lot of blog posts on draft mode. And I've a lot to write about 2014 which was
 an *AMAZING year* : indeed, thanks to the {uri-asciidoctor}[*Asciidoctor project*] and +Java EE 7 / WildFly+ technologies, I gave *2 talks* at {link-devnation-talk}[+DevNation, San Francisco+] to speak about Open Source projects :)  +
-But I'll blog about it +awesome experience+ soon.
+But I'll blog about this +awesome experience+ soon.
 
 *So what this post is about : Docker ? Asciidoctor ? Arquillian ?*
 
 [[docker_arquillian_asciidoctor]]
-.The power of Arquillian & Docker for testing AsciidoctorJ
-image::docker-arquillian-asciidoctor.png[AsciidoctorJ Docker containers managed by Arquillian,550]
+.The power of Arquillian & Docker for AsciidoctorJ integration tests
+image::docker-arquillian-asciidoctor.png[AsciidoctorJ Docker containers managed by Arquillian,750]
 
 You've just read the title and you said : +
 
-- _"Oh no ! Not another post about Docker!"_, 
+- _"Oh no ! Not another post about Docker!"_,
 
 and I want to answer +
 
 - _"Well, it's 2015, is it possible to write a blog post without mentionning Docker ?_" +
 
-To be serious, it's more a blog post about the {uri-asciidoctorj-github}[AsciidoctorJ] project and how {uri-docker}[Docker] helps us to easily check that AsciidoctorJ can be execute into a Java EE application server like WildFly. +
+To be serious, it's more a blog post about the {uri-asciidoctorj}[AsciidoctorJ] project and how {uri-docker}[Docker] helps us to easily check that AsciidoctorJ can be execute into a *Java EE application server* like *WildFly*. +
 So it's not a post about Docker itself but more a use case where Docker is the key to the ease of tests...OK you're right, it's about Docker :)
 
 pass::[more]
 
 == Asciidoctor on the JVM with AsciidoctorJ
 
-I guess that I don't need to introduce Asciidoctor now that it became so popular since it's was started by {uri-twitter-dan-allen}[*Dan Allen*] at the end of 2012.
-But
-Like you know now, Asciidoctor is a toolchain that give you the
+I guess that I don't need to introduce {uri-asciidoctor}[*Asciidoctor*] now that it became so popular since it's was started by {uri-twitter-dan-allen}[*Dan Allen*] at the end of 2012. +
+Well, if you don't know, Asciidoctor is a *fast text processor* and *publishing toolchain* for *converting* +*AsciiDoc*+ content to *HTML5*, *PDF*, *DocBook 5* (or 4.5) and other formats.
+Asciidoctor is written in Ruby, packaged as a RubyGem and published to RubyGems.org.
 
-----
-AsciidoctorJ is the official library for running Asciidoctor on the JVM.
-Using AsciidoctorJ, you can convert AsciiDoc content or analyze the structure of a parsed AsciiDoc document from Java and other JVM languages
-----
+[[asciidoctor_processor]]
+.Asciidoctor convert AsciiDoc files to several formats
+image::{uri-asciidoctor-processor-diagram}[Diagram showing output files that Asciidoctor can generate ,750]
+
+
+*AsciidoctorJ* is the official library for running +Asciidoctor on the JVM+.
+Using AsciidoctorJ, you can convert AsciiDoc content or analyze the structure of a parsed AsciiDoc document from *Java* and *other JVM languages*.
+
 
 [[asciidoctorj_jvm]]
 .Asciidoctor on the JVM with AsciidoctorJ
-image::{uri-asciidoctorj-diagram}[Diagram which explains how AsciidoctorJ makes Asciidoctor works on the JVM,550]
+image::{uri-asciidoctorj-processor-diagram}[Diagram which explains how AsciidoctorJ makes Asciidoctor works on the JVM,750]
 
 == AsciidoctorJ in a Java application server ?
 
-So here we have a problem 
+So here we have a problem
 The problem is that if you want to include AsciidoctorJ in your Java application, it doesn't work. Indeed, AsciidoctorJ is base on JRUby and
 there are some classloader troubles with JRuby see PR118,  Bug 102 and this thread on the asciidoctor discussions list.
 JRuby noticing that "asciidoctor gem is not available"
@@ -104,7 +109,7 @@ We tried
 
 === Make it easy thanks to the power of Arquillian & Docker
 
-OK so we have a solution but there are several manual steps to follow in order to have 
+OK so we have a solution but there are several manual steps to follow in order to have
 
 ==== Arquillian Cube extension to the rescue !
 
@@ -140,15 +145,15 @@ The project layout is as follows :
    |+ wildfly
       |- MANIFEST.MF   // <6>
    |- arquillian.xml   // <7>
-pom.xml		
+pom.xml
 ----
-<1> Dockerfile for AsciidoctorJ into WildFly 8.2
-<2> Java Class which convert AsciiDoc file into HTML or PDf file
+<1> Dockerfile to build Docker image with AsciidoctorJ into WildFly 8.2
+<2> Java Bean which convert AsciiDoc file into HTML or PDf file
 <3> Java Servlet which used the converter
-<4> Sample AsciiDoc file
-<5> Tests to check that AsciidoctorJ works
-<6> MANIFEST file to depend on AsciidoctorJ WilFly AS module
-<7> XML file to configure Arquillian tests
+<4> Sample AsciiDoc file to convert
+<5> Tests to process AsciiDoc to HTML/PDF with AsciidoctorJ
+<6> MANIFEST file used to depend on AsciidoctorJ WilFly AS module
+<7> Arquillian XML file to configure Docker containers
 ====
 
 
@@ -161,19 +166,19 @@ FROM jboss/wildfly:8.2.0.Final   // <1>
 MAINTAINER Maxime Gréau <greau.maxime@gmail.com>
 
 # Create a WildFly admin user to deploy app with CLI
-RUN /opt/jboss/wildfly/bin/add-user.sh -up mgmt-users.properties admin Admin#70365 --silent
+RUN /opt/jboss/wildfly/bin/add-user.sh -up mgmt-users.properties admin Admin#70365 --silent  // <2>
 
-# Set env variables for versions
+# Set env variables for versions // <3>
 ENV ASCIIDOCTORJ_VERSION 1.5.2
 ENV ASCIIDOCTORJ_PDF_VERSION 1.5.0-alpha.6
 ENV ASCIIDOCTORJ_EPUB3_VERSION 1.5.0-alpha.4
 ENV JRUBY_VERSION 1.7.16.1
 
-# Handle asciidoctor-backends
+# Handle asciidoctor-backends // <4>
 ENV ASCIIDOCTOR_BACKENDS /opt/jboss/asciidoctor-backends
 RUN mkdir -p ${ASCIIDOCTOR_BACKENDS}
 
-# Create the AsciidoctorJ module
+# Create the AsciidoctorJ module // <5>
 RUN mkdir -p ${JBOSS_HOME}/modules/org/asciidoctor/main
 ENV ASCIIDOCTORJ_MODULE /opt/jboss/wildfly/modules/org/asciidoctor/main
 
@@ -183,7 +188,7 @@ ENV OUTPUT_DIRECTORY /tmp
 # Set the URL_BASE env variable to download artifacts
 ENV URL_BASE https://repo1.maven.org/maven2/
 
-ADD module.xml ${ASCIIDOCTORJ_MODULE}/module.xml
+ADD module.xml ${ASCIIDOCTORJ_MODULE}/module.xml // <6>
 
 RUN cd ${ASCIIDOCTORJ_MODULE} \
 && curl -O ${URL_BASE}org/asciidoctor/asciidoctorj/${ASCIIDOCTORJ_VERSION}/asciidoctorj-${ASCIIDOCTORJ_VERSION}.jar \
@@ -202,7 +207,8 @@ CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0
 <2> TODO
 <3> TODO
 <4> TODO
-
+<5> TODO
+<6> TODO
 ====
 
 TODO => exemple code
@@ -237,7 +243,7 @@ jboss/wildfly                             8.2.0.Final         24c5b96027df      
 .. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly82* is present in your registry.
 
   docker images
-  
+
 .. Execute tests (Start a container / Execute tests / Stop and destroy the container)
 
   mvn clean test -Pwildfly82
@@ -247,7 +253,7 @@ jboss/wildfly                             8.2.0.Final         24c5b96027df      
 ====
 include::log_maven_build.txt[lines=5..10]
 ====
-  
+
 [IMPORTANT]
 ====
  Until the Docker image is present in your registry, you can just execute the Maven command (2b) !
@@ -266,17 +272,17 @@ include::log_maven_build.txt[lines=5..10]
 
 If you want to customize the container, you can update the dockerfile and re-lauch the Maven command
 
-===== Convert AsciiDoc to PDF and HTML5 
+===== Convert AsciiDoc to PDF and HTML5
 
 The tests are very basic for now, they will convert the same sample.adoc file to a PDF or to HTML.
 
 == AsciidoctorJ in your favorite Java application server ?
 
 It seems that the *JRuby* classloader problem is solve with the use of *JBoss Modules components*. +
-But if you want to quickly test AsciidoctorJ in your favorite Java application server like TomEE or others...feel free to fork the project and quickly test if it works into
+However if you want to quickly test AsciidoctorJ in your favorite Java application server like TomEE or others...feel free to fork the project and quickly test if it works into
 your favorite application server, here are the steps to follow :
 
- . Fork the GitHub repository {uri-docker-asciidoctorj}[docker-asciidoctorj] 
+ . Fork the GitHub repository {uri-docker-asciidoctorj-github}[docker-asciidoctorj]
  . Create a +Dockerfile+ file in a +dockerfiles+ subfolder, following the named convention +{appservername}{version}+
  . Update the +src/test/resources/arquillian.xml+ file to add a docker container
  . Update the +pom.xml+ to add Maven profiles related to the application server
@@ -288,11 +294,11 @@ We are waiting for PR :)
 == Asciidoctor has its own official registry on Docker Hub
 
 The good news here is that the Asciidoctor project now have an *easy way to test* if the future versions of *AsciidoctorJ will be compatible* with this architecture. +
-But the most important thing is that *+Asciidoctor now has its own official registry for Docker images+*, with for now, 2 officials images :
+But the most important thing is that Asciidoctor now has *+its own official registry for Docker images+*, with, for now, 2 officials images :
 
-- asciidoctor
+- asciidoctor _(created by {uri-twitter-guillaume-scheibel}[Guillaume Scheibel])_
 - asciidoctor/asciidoctorj-wildfly82
 
-And I'm so proud to be one of the Docker Hub administrator (with Guillaume Scheibel) for the Asciidoctor Organization ! +
+And I'm so proud to be one of the Docker Hub administrator for the Asciidoctor Organization ! +
 
 Have fun with *Asciidoctor*, *Arquillian* and *Docker* :)
