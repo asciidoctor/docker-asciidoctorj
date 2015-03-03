@@ -1,4 +1,4 @@
-= AsciidoctorJ Docker Container
+= Docker AsciidoctorJ
 Maxime Gréau <https://github.com/mgreau[@mgreau]>
 :page-layout: base
 :idprefix:
@@ -15,11 +15,11 @@ ifdef::env-github[:idprefix: user-content-]
 The *Docker AsciidoctorJ* project ensure that AsciidoctorJ can be used by apps into a Java EE Application Server (WildFly AS for now). +
 This repository provides :
 
-* a Dockerfile to build an image included WildFly 8.2 / AsciidoctorJ 1.5.2 / AsciidoctorJ-PDF 1.5.0
+* a Dockerfile to build an image included WildFly 8.2 / asciidoctorj-1.5.2 / asciidoctorj-pdf-1.5.0
 * Arquillian tests that used a docker container to convert AsciiDoc files to HTML and PDF files 
 
 +
-WARNING: asciidoctorj-epub3 is not working yet with this configuration.
+WARNING: asciidoctorj-epub3 doesn't work, for now, with this configuration.
 
 
 == All in one with Arquillian : Build the Docker image and execute tests in a container
@@ -62,7 +62,7 @@ WARNING: asciidoctorj-epub3 is not working yet with this configuration.
   
 [IMPORTANT]
 ====
- Until the Docker image is present in your registry, you can just execute the Maven command (2b) !
+ Until the Docker image is present in your registry, you can just execute the Maven command (2b) 
 ====
   
 [NOTE]
