@@ -6,8 +6,8 @@
 This Docker container provides:
 
 * WildFly 8.2
-* Asciidoctor 1.5.2
-* Asciidoctor PDF (alpha)
+* AsciidoctorJ 1.5.2
+* AsciidoctorJ PDF (alpha)
 * Asciidoctor backends
 
 == How to use it
