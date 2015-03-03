@@ -1,0 +1,20 @@
+= AsciidoctorJ WildFly Docker Container
+:source-highlighter: coderay
+
+== The environment
+
+This Docker container provides:
+
+* WildFly 8.2
+* Asciidoctor 1.5.2
+* Asciidoctor PDF (alpha)
+* Asciidoctor backends
+
+== How to use it
+
+Just run:
+
+[source,bash]
+----
+docker run -it asciidoctor/asciidoctorj-wildfly
+----
