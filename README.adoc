@@ -7,7 +7,7 @@ ifdef::env-github[:idprefix: user-content-]
 :source-language: java
 :language: {source-language}
 :uri-asciidoctor: {uri-docs}/what-is-asciidoctor
-:uri-repo: https://github.com/mgreau/docker-asciidoctorj
+:uri-repo: https://github.com/asciidoctor/docker-asciidoctorj
 :uri-issues: {uri-repo}/issues
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
@@ -26,7 +26,7 @@ WARNING: asciidoctorj-epub3 doesn't work, for now, with this configuration.
 
 . Clone this project :
 
- $ git clone https://github.com/mgreau/docker-asciidoctorj.git
+ $ git clone https://github.com/asciidoctor/docker-asciidoctorj.git
 
 . Ensure Java, Maven and Docker are installed
 . Execute tests (Build a docker image / Start a container / Execute tests / Stop and destroy the container)
@@ -39,7 +39,7 @@ WARNING: asciidoctorj-epub3 doesn't work, for now, with this configuration.
 . How to build the Docker image with docker command :
 .. Clone this project :
 
- $ git clone https://github.com/mgreau/docker-asciidoctorj.git
+ $ git clone https://github.com/asciidoctor/docker-asciidoctorj.git
 
 .. Build the Docker image
 
