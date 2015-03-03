@@ -41,17 +41,14 @@
 
     <container qualifier="wildfly82" default="true">
         <configuration>
-            <property name="target">wildfly:8.2.0.Final:remote</property>
-            <property name="host">dockerServerIp</property>
-            <property name="managementPort">9991</property>
+            <property name="managementAddress">dockerServerIp</property>
             <property name="username">admin</property>
             <property name="password">Admin#70365</property>
         </configuration>
     </container>
     <container qualifier="wildfly82_dockerfile">
         <configuration>
-            <property name="target">wildfly:8.2.0.Final:remote</property>
-            <property name="managementPort">9991</property>
+            <property name="managementAddress">dockerServerIp</property>
             <property name="username">admin</property>
             <property name="password">Admin#70365</property>
         </configuration>
