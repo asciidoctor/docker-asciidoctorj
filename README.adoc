@@ -44,14 +44,14 @@ WARNING: asciidoctorj-epub3 doesn't work, for now, with this configuration.
 .. Build the Docker image
 
   cd docker-asciidoctorj
-  docker build -t asciidoctor/asciidoctorj-wildfly82 dockerfiles/wildfly82/
+  docker build -t asciidoctor/asciidoctorj-wildfly dockerfiles/wildfly82/
 
 . How to execute the Arquillian Tests using an existing Docker image
 .. Ensure Java, Maven and Docker are installed, and that the Docker image *asciidoctor/asciidoctorj-wildfly82* is present in your registry.
 
  docker images
  REPOSITORY                             TAG        IMAGE ID          CREATED           VIRTUAL SIZE
- asciidoctor/asciidoctorj-wildfly82     latest     ddf1badf985c      12 hours ago      982.5 MB
+ asciidoctor/asciidoctorj-wildfly       latest     ddf1badf985c      12 hours ago      982.5 MB
 
 .. Execute tests (Start a container / Execute tests / Stop and destroy the container)
 
