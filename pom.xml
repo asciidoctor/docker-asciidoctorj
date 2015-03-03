@@ -12,6 +12,7 @@
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<arquillian.cube.autostart />
+		<docker.serverProtocol>http</docker.serverProtocol>
 		<docker.serverIp>127.0.0.1</docker.serverIp>
 		<docker.serverPort>2375</docker.serverPort>
 		<docker.serverVersion>1.16</docker.serverVersion>
