@@ -2,8 +2,8 @@
 Maxime Gréau <https://github.com/mgreau[@mgreau]>
 :page-layout: base
 :idprefix:
-ifdef::env-github[:idprefix: user-content-]
 :idseparator: -
+:important-caption: :exclamation:
 :source-language: java
 :language: {source-language}
 :uri-asciidoctor: {uri-docs}/what-is-asciidoctor
@@ -11,6 +11,12 @@ ifdef::env-github[:idprefix: user-content-]
 :uri-issues: {uri-repo}/issues
 :uri-discuss: http://discuss.asciidoctor.org
 :uri-arquillian-cube-project: https://github.com/arquillian/arquillian-cube
+
+IMPORTANT: The Docker AsciidoctorJ project is no longer relevant and has been archived.
+The project was created to ensure that AsciidoctorJ can be used by apps in a Java Application Server, WildFly AS in particular.
+That integration has been addressed directly in AsciidoctorJ and is tested as part of the test suite.
+Therefore, there is no longer a need for this project.
+If you are looking for a Docker/OCI image for Asciidoctor, check out the https://github.com/asciidoctor/docker-asciidoctor[Asciidoctor Docker Container].
 
 The *Docker AsciidoctorJ* project ensure that *AsciidoctorJ* can be used by apps into a Java Application Server (*WildFly AS* for now). +
 This repository provides :
